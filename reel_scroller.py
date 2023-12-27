@@ -1,5 +1,6 @@
 import cv2
 import pyautogui as pg
+import webbrowser as wb
 import mediapipe as mp
 from trackers.hand_tracker import HandDetector
 
@@ -10,6 +11,8 @@ detector = HandDetector(staticMode=False, maxHands=1, modelComplexity=1, detecti
 
 cap = cv2.VideoCapture(0)
 temp  = ""
+
+wb.open("https://www.youtube.com/shorts/")
 
 with mp_hands.Hands(
     static_image_mode=False,
@@ -35,8 +38,7 @@ with mp_hands.Hands(
             length, info, img = detector.findDistance(p1, p2, img, scale=10)
 
             print(f"Distance: {length}")
-            pg.press("down") if (length > 180) else None 
-            # print("down") if (length > 140) else None 
+            pg.press("down") if (length > 65) else None 
             
             cv2.imshow('Hand Gestures', image)
             if cv2.waitKey(5) & 0xFF == 27: 
